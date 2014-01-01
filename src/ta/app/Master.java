@@ -22,7 +22,7 @@ import ta.app.frame.alat.LihatFrame;
 import ta.app.frame.alat.UbahFrame;
 import ta.app.frame.kalibrasi.BulanFrame;
 import ta.app.frame.kalibrasi.HasilFrame;
-import ta.app.frame.kalibrasi.TahunFrame;
+import ta.app.frame.kalibrasi.DataUkurFrame;
 import ta.app.frame.laporan.MingguFrame;
 import ta.app.frame.laporan.OrderFrame;
 import ta.app.frame.laporan.StokFrame;
@@ -350,7 +350,7 @@ public class Master extends javax.swing.JFrame {
         //menu kalibrasi
         bulanFrame = new BulanFrame();
         hasilFrame = new HasilFrame();
-        tahunFrame = new TahunFrame();
+        tahunFrame = new DataUkurFrame();
         //menu order
         daftarFrame = new DaftarFrame();
         permohonanFrame = new PermohonanFrame();
