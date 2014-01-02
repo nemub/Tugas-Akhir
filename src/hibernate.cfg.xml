@@ -4,9 +4,9 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3307/skripsi</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ta-sahal</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">derossi</property>
+    <property name="hibernate.connection.password">rootUser21</property>
     <mapping resource="ta/util/orm/mapping/Pengguna.hbm.xml"/>
     <mapping resource="ta/util/orm/mapping/HakAkses.hbm.xml"/>
     <mapping resource="ta/util/orm/mapping/Vendor.hbm.xml"/>
