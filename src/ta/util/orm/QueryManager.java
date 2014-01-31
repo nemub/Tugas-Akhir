@@ -24,6 +24,7 @@ import java.util.List;
 /**
  *
  * @author shinzo maru
+ * @param <E>
  */
 public interface QueryManager<E> {
 
@@ -100,7 +101,7 @@ public interface QueryManager<E> {
      * @param id
      * @return memproses HQL untuk proses pencarian data
      */
-    List<E> getApproximateData(String table, String init, String id);
+    List<E> searchData(String table, String init, String id);
 
     /**
      *

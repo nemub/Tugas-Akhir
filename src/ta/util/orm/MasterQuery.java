@@ -174,7 +174,7 @@ public class MasterQuery<E> implements QueryManager<E> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<E> getApproximateData(String table, String init, String id) {
+    public List<E> searchData(String table, String init, String id) {
         session = HibernateUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
 
