@@ -17,6 +17,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import ta.app.frame.alat.InputFrame;
 import ta.app.frame.sistem.MasukFrame;
 import ta.app.frame.sistem.OtorisasiFrame;
 import ta.app.frame.sistem.PenggunaFrame;
@@ -31,9 +32,10 @@ import ta.util.orm.mapping.Pengguna;
 public class Master extends javax.swing.JFrame {
 
     // Menu Sistem
-    private final JInternalFrame[] frames = new JInternalFrame[4];
+    private final JInternalFrame[] frames = new JInternalFrame[5];
     // Menu Keys
-    private static final int LOGIN = 0, ACCOUNT = 1, USER = 2, VENDOR = 3;
+    private static final int LOGIN = 0, ACCOUNT = 1, USER = 2, VENDOR = 3,
+            ITEM = 4;
 
     /**
      * Creates new form Master
@@ -146,6 +148,11 @@ public class Master extends javax.swing.JFrame {
         alatMenu.setText("Alat");
 
         inputItem.setText("Input Data");
+        inputItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputItemActionPerformed(evt);
+            }
+        });
         alatMenu.add(inputItem);
 
         lihatItem.setText("Lihat Data");
@@ -258,6 +265,13 @@ public class Master extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_tutupItemActionPerformed
 
+    private void inputItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputItemActionPerformed
+        InputFrame inputFrame = (InputFrame) frames[ITEM];
+        closeAllFrame();
+        frames[ITEM].show();
+        inputFrame.fill();
+    }//GEN-LAST:event_inputItemActionPerformed
+
     /*
      * @param args the command line arguments
      */
@@ -330,6 +344,7 @@ public class Master extends javax.swing.JFrame {
         frames[ACCOUNT] = new PenggunaFrame();
         frames[USER] = new OtorisasiFrame();
         frames[VENDOR] = new VendorFrame();
+        frames[ITEM] = new InputFrame();
         // Register MDI to Master
         for (JInternalFrame frame : frames) {
             if (frame != null) {
@@ -371,6 +386,7 @@ public class Master extends javax.swing.JFrame {
         } else if (authorized.getHak().equals("Inspector")) {
         } else if (authorized.getHak().equals("Pengguna")) {
             vendorItem.setEnabled(true);
+            alatMenu.setEnabled(true);
         } else if (authorized.getHak().equals("Pimpinan")) {
         }
     }
