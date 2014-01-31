@@ -64,6 +64,9 @@
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="alatMenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Alat"/>
+          </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="inputItem">
               <Properties>
@@ -73,11 +76,6 @@
             <MenuItem class="javax.swing.JMenuItem" name="lihatItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Lihat Data"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="ubahItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Ubah Data"/>
               </Properties>
             </MenuItem>
           </SubComponents>

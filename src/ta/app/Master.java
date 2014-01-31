@@ -66,7 +66,6 @@ public class Master extends javax.swing.JFrame {
         alatMenu = new javax.swing.JMenu();
         inputItem = new javax.swing.JMenuItem();
         lihatItem = new javax.swing.JMenuItem();
-        ubahItem = new javax.swing.JMenuItem();
         kalibrasiMenu = new javax.swing.JMenu();
         kalibrasiItem = new javax.swing.JMenu();
         jBulanItem = new javax.swing.JMenuItem();
@@ -144,14 +143,13 @@ public class Master extends javax.swing.JFrame {
 
         Transaksi.add(sistemMenu);
 
+        alatMenu.setText("Alat");
+
         inputItem.setText("Input Data");
         alatMenu.add(inputItem);
 
         lihatItem.setText("Lihat Data");
         alatMenu.add(lihatItem);
-
-        ubahItem.setText("Ubah Data");
-        alatMenu.add(ubahItem);
 
         Transaksi.add(alatMenu);
 
@@ -301,7 +299,6 @@ public class Master extends javax.swing.JFrame {
     private javax.swing.JMenuItem setujuItem;
     private javax.swing.JMenu sistemMenu;
     private javax.swing.JMenuItem tutupItem;
-    private javax.swing.JMenuItem ubahItem;
     private javax.swing.JMenuItem vendorItem;
     // End of variables declaration//GEN-END:variables
 
