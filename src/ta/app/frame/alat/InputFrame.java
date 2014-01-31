@@ -89,19 +89,19 @@ public class InputFrame extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Kode Alat");
 
-        alatTxt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vernier Caliper", "Micrometer", "Dial Test Indicator", "Ring Gauge", "Thread Gauge", "Master Gauge" }));
+        alatTxt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vernier Caliper", "Micrometer", "Holtest", "Dial Test Indicator", "Bore Gauge", "Ring Gauge", "Thread Gauge", "Snap Gauge", "Width Gauge", "Plug Gauge" }));
 
         jLabel2.setText("Nama Alat");
 
         jLabel4.setText("Standar");
 
-        modelTxt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Honda", "Suzuki" }));
+        modelTxt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mitsubishi", "Suzuki" }));
 
         jLabel6.setText("Model");
 
         jLabel10.setText("-");
 
-        lokasiTxt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gudang", "Kantor" }));
+        lokasiTxt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kalibrasi Room", "CS", "CR", "CH", "CB", "CM" }));
 
         jLabel3.setText("Lokasi");
 
@@ -137,7 +137,7 @@ public class InputFrame extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Jumlah");
 
-        tipeTxt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tipeTxt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Alat Ukur", "Alat Inspeksi" }));
 
         jLabel11.setText("Tipe");
 
