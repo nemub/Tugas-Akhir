@@ -1,5 +1,5 @@
 package ta.util.orm.mapping;
-// Generated Jan 29, 2014 9:57:48 PM by Hibernate Tools 3.6.0
+// Generated Jan 31, 2014 3:09:33 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -34,9 +34,9 @@ public class AlatUkur  implements java.io.Serializable {
      private String kode;
      private String nama;
      private String standar;
+     private int jumlah;
      private String model;
      private String lokasi;
-     private int jumlah;
      private Date tanggalBeli;
      private String tipe;
      private Set<Pesanan> pesanans = new HashSet<Pesanan>(0);
@@ -46,27 +46,27 @@ public class AlatUkur  implements java.io.Serializable {
     }
 
 	
-    public AlatUkur(Vendor vendor, String serial, String kode, String nama, String standar, String model, String lokasi, int jumlah, Date tanggalBeli, String tipe) {
+    public AlatUkur(Vendor vendor, String serial, String kode, String nama, String standar, int jumlah, String model, String lokasi, Date tanggalBeli, String tipe) {
         this.vendor = vendor;
         this.serial = serial;
         this.kode = kode;
         this.nama = nama;
         this.standar = standar;
+        this.jumlah = jumlah;
         this.model = model;
         this.lokasi = lokasi;
-        this.jumlah = jumlah;
         this.tanggalBeli = tanggalBeli;
         this.tipe = tipe;
     }
-    public AlatUkur(Vendor vendor, String serial, String kode, String nama, String standar, String model, String lokasi, int jumlah, Date tanggalBeli, String tipe, Set<Pesanan> pesanans, Set<JadwalKalibrasi> jadwalKalibrasis) {
+    public AlatUkur(Vendor vendor, String serial, String kode, String nama, String standar, int jumlah, String model, String lokasi, Date tanggalBeli, String tipe, Set<Pesanan> pesanans, Set<JadwalKalibrasi> jadwalKalibrasis) {
        this.vendor = vendor;
        this.serial = serial;
        this.kode = kode;
        this.nama = nama;
        this.standar = standar;
+       this.jumlah = jumlah;
        this.model = model;
        this.lokasi = lokasi;
-       this.jumlah = jumlah;
        this.tanggalBeli = tanggalBeli;
        this.tipe = tipe;
        this.pesanans = pesanans;
@@ -136,6 +136,16 @@ public class AlatUkur  implements java.io.Serializable {
     }
 
     
+    @Column(name="jumlah", nullable=false)
+    public int getJumlah() {
+        return this.jumlah;
+    }
+    
+    public void setJumlah(int jumlah) {
+        this.jumlah = jumlah;
+    }
+
+    
     @Column(name="model", nullable=false, length=45)
     public String getModel() {
         return this.model;
@@ -153,16 +163,6 @@ public class AlatUkur  implements java.io.Serializable {
     
     public void setLokasi(String lokasi) {
         this.lokasi = lokasi;
-    }
-
-    
-    @Column(name="jumlah", nullable=false)
-    public int getJumlah() {
-        return this.jumlah;
-    }
-    
-    public void setJumlah(int jumlah) {
-        this.jumlah = jumlah;
     }
 
     @Temporal(TemporalType.DATE)

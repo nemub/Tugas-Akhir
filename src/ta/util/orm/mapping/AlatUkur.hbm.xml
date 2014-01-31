@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 29, 2014 9:57:49 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Jan 31, 2014 3:09:33 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="ta.util.orm.mapping.AlatUkur" table="alat_ukur" catalog="`TA-SAHAL`">
         <id name="idAlatUkur" type="java.lang.Integer">
@@ -23,14 +23,14 @@
         <property name="standar" type="string">
             <column name="standar" length="45" not-null="true" />
         </property>
+        <property name="jumlah" type="int">
+            <column name="jumlah" not-null="true" />
+        </property>
         <property name="model" type="string">
             <column name="model" length="45" not-null="true" />
         </property>
         <property name="lokasi" type="string">
             <column name="lokasi" length="45" not-null="true" />
-        </property>
-        <property name="jumlah" type="int">
-            <column name="jumlah" not-null="true" />
         </property>
         <property name="tanggalBeli" type="date">
             <column name="tanggal_beli" length="10" not-null="true" />

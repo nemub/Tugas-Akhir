@@ -58,6 +58,7 @@ CREATE TABLE `alat_ukur` (
   `kode` varchar(10) NOT NULL,
   `nama` varchar(45) NOT NULL,
   `standar` varchar(45) NOT NULL,
+  `jumlah` int(11) NOT NULL DEFAULT '1',
   `model` varchar(45) NOT NULL,
   `lokasi` varchar(45) NOT NULL,
   `vendor` int(11) NOT NULL,
@@ -320,4 +321,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-01-31 14:29:04
+-- Dump completed on 2014-01-31 15:07:54
