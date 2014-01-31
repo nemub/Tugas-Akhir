@@ -86,7 +86,6 @@ public class Master extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplikasi Sistem Informasi Alat Ukur");
         setAlwaysOnTop(true);
-        setUndecorated(true);
         setResizable(false);
 
         sistemMenu.setText("Sistem");
