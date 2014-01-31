@@ -11,7 +11,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="masukItem">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Masuk"/>
+                <Property name="text" type="java.lang.String" value="Login"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="masukItemActionPerformed"/>
@@ -19,7 +19,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="keluarItem">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Keluar"/>
+                <Property name="text" type="java.lang.String" value="Logout"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keluarItemActionPerformed"/>
@@ -55,7 +55,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="tutupItem">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Tutup"/>
+                <Property name="text" type="java.lang.String" value="Exit"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tutupItemActionPerformed"/>
@@ -65,7 +65,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="alatMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Alat"/>
+            <Property name="text" type="java.lang.String" value="Alat Ukur"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="inputItem">
@@ -88,28 +88,31 @@
             <Property name="text" type="java.lang.String" value="Kalibrasi"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="kalibrasiItem">
+            <MenuItem class="javax.swing.JMenuItem" name="jadwalKalItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Jadwal Kalibrasi"/>
               </Properties>
+            </MenuItem>
+            <Menu class="javax.swing.JMenu" name="hasilKalItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Hasil Kalibrasi"/>
+              </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jBulanItem">
+                <MenuItem class="javax.swing.JMenuItem" name="dataKalItem">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Jadwal  Bulanan"/>
+                    <Property name="text" type="java.lang.String" value="Data Kalibrasi"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dataKalItemActionPerformed"/>
+                  </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jTahunItem">
+                <MenuItem class="javax.swing.JMenuItem" name="dataUkurItem">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Jadwal Tahunan"/>
+                    <Property name="text" type="java.lang.String" value="Data Ukur"/>
                   </Properties>
                 </MenuItem>
               </SubComponents>
             </Menu>
-            <MenuItem class="javax.swing.JMenuItem" name="hasilItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Hasil Kalibrasi"/>
-              </Properties>
-            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="orderMenu">
@@ -119,17 +122,20 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="permohonanItem">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Permohonan"/>
+                <Property name="text" type="java.lang.String" value="Permohonan Order"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="prosesItem">
+            <MenuItem class="javax.swing.JMenuItem" name="buatPOItem">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Proses"/>
+                <Property name="text" type="java.lang.String" value="Pembuatan PO"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buatPOItemActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="setujuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="setujuPOItem">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Persetujuan"/>
+                <Property name="text" type="java.lang.String" value="Persetujuan PO"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="daftarItem">
@@ -149,23 +155,11 @@
                 <Property name="text" type="java.lang.String" value="Laporan Stok"/>
               </Properties>
             </MenuItem>
-            <Menu class="javax.swing.JMenu" name="lapKalibrasiItem">
+            <MenuItem class="javax.swing.JMenuItem" name="lapKalibrasiItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Laporan Kalibrasi"/>
               </Properties>
-              <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="lapMingguItem">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Laporan Mingguan"/>
-                  </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="lapBulanItem">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Laporan Bulanan"/>
-                  </Properties>
-                </MenuItem>
-              </SubComponents>
-            </Menu>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="lapOrderItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Laporan Order"/>

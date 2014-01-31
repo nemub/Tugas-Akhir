@@ -1,5 +1,5 @@
 package ta.util.orm.mapping;
-// Generated Jan 31, 2014 3:09:33 PM by Hibernate Tools 3.6.0
+// Generated Jan 31, 2014 4:08:54 PM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;

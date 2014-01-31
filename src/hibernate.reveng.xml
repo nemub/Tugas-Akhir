@@ -2,14 +2,14 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="ta-sahal"/>
-  <table-filter match-name="alat_ukur"/>
-  <table-filter match-name="hasil_kalibrasi"/>
-  <table-filter match-name="vendor"/>
-  <table-filter match-name="pengguna"/>
   <table-filter match-name="data_kalibrasi"/>
-  <table-filter match-name="pesanan"/>
-  <table-filter match-name="po"/>
-  <table-filter match-name="data_hasil"/>
-  <table-filter match-name="jadwal_kalibrasi"/>
   <table-filter match-name="akses"/>
+  <table-filter match-name="jadwal_kalibrasi"/>
+  <table-filter match-name="po"/>
+  <table-filter match-name="alat_ukur"/>
+  <table-filter match-name="pesanan"/>
+  <table-filter match-name="data_hasil"/>
+  <table-filter match-name="vendor"/>
+  <table-filter match-name="hasil_kalibrasi"/>
+  <table-filter match-name="pengguna"/>
 </hibernate-reverse-engineering>

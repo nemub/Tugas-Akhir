@@ -69,20 +69,18 @@ public class Master extends javax.swing.JFrame {
         inputItem = new javax.swing.JMenuItem();
         lihatItem = new javax.swing.JMenuItem();
         kalibrasiMenu = new javax.swing.JMenu();
-        kalibrasiItem = new javax.swing.JMenu();
-        jBulanItem = new javax.swing.JMenuItem();
-        jTahunItem = new javax.swing.JMenuItem();
-        hasilItem = new javax.swing.JMenuItem();
+        jadwalKalItem = new javax.swing.JMenuItem();
+        hasilKalItem = new javax.swing.JMenu();
+        dataKalItem = new javax.swing.JMenuItem();
+        dataUkurItem = new javax.swing.JMenuItem();
         orderMenu = new javax.swing.JMenu();
         permohonanItem = new javax.swing.JMenuItem();
-        prosesItem = new javax.swing.JMenuItem();
-        setujuItem = new javax.swing.JMenuItem();
+        buatPOItem = new javax.swing.JMenuItem();
+        setujuPOItem = new javax.swing.JMenuItem();
         daftarItem = new javax.swing.JMenuItem();
         laporanMenu = new javax.swing.JMenu();
         lapStokItem = new javax.swing.JMenuItem();
-        lapKalibrasiItem = new javax.swing.JMenu();
-        lapMingguItem = new javax.swing.JMenuItem();
-        lapBulanItem = new javax.swing.JMenuItem();
+        lapKalibrasiItem = new javax.swing.JMenuItem();
         lapOrderItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -93,7 +91,7 @@ public class Master extends javax.swing.JFrame {
 
         sistemMenu.setText("Sistem");
 
-        masukItem.setText("Masuk");
+        masukItem.setText("Login");
         masukItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 masukItemActionPerformed(evt);
@@ -101,7 +99,7 @@ public class Master extends javax.swing.JFrame {
         });
         sistemMenu.add(masukItem);
 
-        keluarItem.setText("Keluar");
+        keluarItem.setText("Logout");
         keluarItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 keluarItemActionPerformed(evt);
@@ -135,7 +133,7 @@ public class Master extends javax.swing.JFrame {
         sistemMenu.add(otorisasiItem);
         sistemMenu.add(jSeparator2);
 
-        tutupItem.setText("Tutup");
+        tutupItem.setText("Exit");
         tutupItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tutupItemActionPerformed(evt);
@@ -145,7 +143,7 @@ public class Master extends javax.swing.JFrame {
 
         Transaksi.add(sistemMenu);
 
-        alatMenu.setText("Alat");
+        alatMenu.setText("Alat Ukur");
 
         inputItem.setText("Input Data");
         inputItem.addActionListener(new java.awt.event.ActionListener() {
@@ -162,31 +160,41 @@ public class Master extends javax.swing.JFrame {
 
         kalibrasiMenu.setText("Kalibrasi");
 
-        kalibrasiItem.setText("Jadwal Kalibrasi");
+        jadwalKalItem.setText("Jadwal Kalibrasi");
+        kalibrasiMenu.add(jadwalKalItem);
 
-        jBulanItem.setText("Jadwal  Bulanan");
-        kalibrasiItem.add(jBulanItem);
+        hasilKalItem.setText("Hasil Kalibrasi");
 
-        jTahunItem.setText("Jadwal Tahunan");
-        kalibrasiItem.add(jTahunItem);
+        dataKalItem.setText("Data Kalibrasi");
+        dataKalItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dataKalItemActionPerformed(evt);
+            }
+        });
+        hasilKalItem.add(dataKalItem);
 
-        kalibrasiMenu.add(kalibrasiItem);
+        dataUkurItem.setText("Data Ukur");
+        hasilKalItem.add(dataUkurItem);
 
-        hasilItem.setText("Hasil Kalibrasi");
-        kalibrasiMenu.add(hasilItem);
+        kalibrasiMenu.add(hasilKalItem);
 
         Transaksi.add(kalibrasiMenu);
 
         orderMenu.setText("Order");
 
-        permohonanItem.setText("Permohonan");
+        permohonanItem.setText("Permohonan Order");
         orderMenu.add(permohonanItem);
 
-        prosesItem.setText("Proses");
-        orderMenu.add(prosesItem);
+        buatPOItem.setText("Pembuatan PO");
+        buatPOItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buatPOItemActionPerformed(evt);
+            }
+        });
+        orderMenu.add(buatPOItem);
 
-        setujuItem.setText("Persetujuan");
-        orderMenu.add(setujuItem);
+        setujuPOItem.setText("Persetujuan PO");
+        orderMenu.add(setujuPOItem);
 
         daftarItem.setText("Daftar Order");
         orderMenu.add(daftarItem);
@@ -199,13 +207,6 @@ public class Master extends javax.swing.JFrame {
         laporanMenu.add(lapStokItem);
 
         lapKalibrasiItem.setText("Laporan Kalibrasi");
-
-        lapMingguItem.setText("Laporan Mingguan");
-        lapKalibrasiItem.add(lapMingguItem);
-
-        lapBulanItem.setText("Laporan Bulanan");
-        lapKalibrasiItem.add(lapBulanItem);
-
         laporanMenu.add(lapKalibrasiItem);
 
         lapOrderItem.setText("Laporan Order");
@@ -272,6 +273,14 @@ public class Master extends javax.swing.JFrame {
         inputFrame.fill();
     }//GEN-LAST:event_inputItemActionPerformed
 
+    private void dataKalItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataKalItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dataKalItemActionPerformed
+
+    private void buatPOItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buatPOItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buatPOItemActionPerformed
+
     /*
      * @param args the command line arguments
      */
@@ -286,19 +295,18 @@ public class Master extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar Transaksi;
     private javax.swing.JMenu alatMenu;
+    private javax.swing.JMenuItem buatPOItem;
     private javax.swing.JMenuItem daftarItem;
-    private javax.swing.JMenuItem hasilItem;
+    private javax.swing.JMenuItem dataKalItem;
+    private javax.swing.JMenuItem dataUkurItem;
+    private javax.swing.JMenu hasilKalItem;
     private javax.swing.JMenuItem inputItem;
-    private javax.swing.JMenuItem jBulanItem;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JMenuItem jTahunItem;
-    private javax.swing.JMenu kalibrasiItem;
+    private javax.swing.JMenuItem jadwalKalItem;
     private javax.swing.JMenu kalibrasiMenu;
     private javax.swing.JMenuItem keluarItem;
-    private javax.swing.JMenuItem lapBulanItem;
-    private javax.swing.JMenu lapKalibrasiItem;
-    private javax.swing.JMenuItem lapMingguItem;
+    private javax.swing.JMenuItem lapKalibrasiItem;
     private javax.swing.JMenuItem lapOrderItem;
     private javax.swing.JMenuItem lapStokItem;
     private javax.swing.JMenu laporanMenu;
@@ -309,8 +317,7 @@ public class Master extends javax.swing.JFrame {
     private javax.swing.JMenuItem otorisasiItem;
     private javax.swing.JMenuItem penggunaItem;
     private javax.swing.JMenuItem permohonanItem;
-    private javax.swing.JMenuItem prosesItem;
-    private javax.swing.JMenuItem setujuItem;
+    private javax.swing.JMenuItem setujuPOItem;
     private javax.swing.JMenu sistemMenu;
     private javax.swing.JMenuItem tutupItem;
     private javax.swing.JMenuItem vendorItem;

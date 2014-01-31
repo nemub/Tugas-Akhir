@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 31, 2014 3:09:33 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Jan 31, 2014 4:08:55 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="ta.util.orm.mapping.JadwalKalibrasi" table="jadwal_kalibrasi" catalog="`TA-SAHAL`">
         <id name="idJadwalKalibrasi" type="java.lang.Integer">
