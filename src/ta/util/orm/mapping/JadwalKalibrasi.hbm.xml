@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 29, 2014 9:57:49 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="ta.util.orm.mapping.JadwalKalibrasi" table="jadwal_kalibrasi" catalog="`TA-SAHAL`">
+        <id name="idJadwalKalibrasi" type="java.lang.Integer">
+            <column name="id_jadwal_kalibrasi" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="alatUkur" class="ta.util.orm.mapping.AlatUkur" fetch="select">
+            <column name="alat_ukur" not-null="true" />
+        </many-to-one>
+        <property name="tanggal" type="date">
+            <column name="tanggal" length="10" not-null="true" />
+        </property>
+        <property name="tempat" type="string">
+            <column name="tempat" length="45" not-null="true" />
+        </property>
+        <set name="dataKalibrasis" table="data_kalibrasi" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="jadwal_kalibrasi" not-null="true" />
+            </key>
+            <one-to-many class="ta.util.orm.mapping.DataKalibrasi" />
+        </set>
+    </class>
+</hibernate-mapping>

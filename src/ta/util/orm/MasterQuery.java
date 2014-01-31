@@ -17,7 +17,6 @@
  * 
  *  Thank you.....
  */
-
 package ta.util.orm;
 
 import java.util.List;
@@ -29,14 +28,17 @@ import org.hibernate.Transaction;
 /**
  *
  * @author shinzo maru
+ * @param <E>
  */
 public class MasterQuery<E> implements QueryManager<E> {
+
     protected Query query;
     protected Session session;
     protected Transaction transaction;
     private List<E> listData = null;
 
-    public MasterQuery() {}
+    public MasterQuery() {
+    }
 
     @SuppressWarnings("unchecked")
     @Override
@@ -46,8 +48,8 @@ public class MasterQuery<E> implements QueryManager<E> {
 
         try {
             query = session.createQuery(QUERY_FROM.replaceAll(SET_TABLE, table));
-            listData = (List<E>)query.list();
-        } catch (Exception e) {
+            listData = (List<E>) query.list();
+        } catch (HibernateException e) {
             e.getCause().getMessage();
             transaction.rollback();
         } finally {
@@ -66,8 +68,8 @@ public class MasterQuery<E> implements QueryManager<E> {
         try {
             query = session.createQuery(QUERY_FROM_WHERE.replaceAll(SET_TABLE, table).
                     replaceAll(SET_FIELD, init).replaceAll(SET_DATA, id));
-            listData = (List<E>)query.list();
-        } catch (Exception e) {
+            listData = (List<E>) query.list();
+        } catch (HibernateException e) {
             e.getCause().getMessage();
             transaction.rollback();
         } finally {
@@ -87,8 +89,8 @@ public class MasterQuery<E> implements QueryManager<E> {
             query = session.createQuery(QUERY_BETWEEN.replaceAll(SET_TABLE, table).
                     replaceAll(SET_FIELD, init).replaceAll(SET_FROM, from).
                     replaceAll(SET_TO, to));
-            listData = (List<E>)query.list();
-        } catch (Exception e) {
+            listData = (List<E>) query.list();
+        } catch (HibernateException e) {
             e.getCause().getMessage();
             transaction.rollback();
         } finally {
@@ -108,7 +110,7 @@ public class MasterQuery<E> implements QueryManager<E> {
         try {
             query = session.createQuery(QUERY_FROM.replaceAll(SET_TABLE, table));
             object = (E) query.uniqueResult();
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             e.getCause().getMessage();
             transaction.rollback();
         } finally {
@@ -129,7 +131,7 @@ public class MasterQuery<E> implements QueryManager<E> {
             query = session.createQuery(QUERY_FROM_WHERE.replaceAll(SET_TABLE, table).
                     replaceAll(SET_FIELD, init).replaceAll(SET_DATA, id));
             object = (E) query.uniqueResult();
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             e.getCause().getMessage();
             transaction.rollback();
         } finally {
@@ -179,8 +181,8 @@ public class MasterQuery<E> implements QueryManager<E> {
         try {
             query = session.createQuery(QUERY_WHERE_LIKE.replaceAll(SET_TABLE, table).
                     replaceAll(SET_FIELD, init).replaceAll(SET_DATA, id));
-            listData = (List<E>)query.list();
-        } catch (Exception e) {
+            listData = (List<E>) query.list();
+        } catch (HibernateException e) {
             e.getCause().getMessage();
             transaction.rollback();
         } finally {

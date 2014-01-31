@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 20, 2013 5:25:46 PM by Hibernate Tools 3.2.1.GA -->
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 29, 2014 9:57:49 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="ta.util.orm.mapping.Vendor" table="vendor" catalog="skripsi">
-        <id name="id" type="java.lang.Integer">
-            <column name="id" />
+    <class name="ta.util.orm.mapping.Vendor" table="vendor" catalog="`TA-SAHAL`">
+        <id name="idVendor" type="java.lang.Integer">
+            <column name="id_vendor" />
             <generator class="identity" />
         </id>
         <property name="nama" type="string">
@@ -15,13 +15,19 @@
             <column name="kode" length="5" not-null="true" />
         </property>
         <property name="telepon" type="string">
-            <column name="telepon" length="15" not-null="true" />
+            <column name="telepon" length="24" />
         </property>
         <property name="email" type="string">
-            <column name="email" length="45" not-null="true" />
+            <column name="email" length="45" />
         </property>
         <property name="alamat" type="string">
-            <column name="alamat" length="65535" not-null="true" />
+            <column name="alamat" length="65535" />
         </property>
+        <set name="alatUkurs" table="alat_ukur" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="vendor" not-null="true" />
+            </key>
+            <one-to-many class="ta.util.orm.mapping.AlatUkur" />
+        </set>
     </class>
 </hibernate-mapping>

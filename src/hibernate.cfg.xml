@@ -4,11 +4,22 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ta-sahal</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ta-sahal?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">rootUser21</property>
-    <mapping resource="ta/util/orm/mapping/Pengguna.hbm.xml"/>
-    <mapping resource="ta/util/orm/mapping/HakAkses.hbm.xml"/>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
+    <property name="hibernate.jdbc.fetch_size">21</property>
+    <mapping resource="ta/util/orm/mapping/DataKalibrasi.hbm.xml"/>
+    <mapping resource="ta/util/orm/mapping/Po.hbm.xml"/>
+    <mapping resource="ta/util/orm/mapping/Pesanan.hbm.xml"/>
+    <mapping resource="ta/util/orm/mapping/Akses.hbm.xml"/>
+    <mapping resource="ta/util/orm/mapping/HasilKalibrasi.hbm.xml"/>
     <mapping resource="ta/util/orm/mapping/Vendor.hbm.xml"/>
+    <mapping resource="ta/util/orm/mapping/JadwalKalibrasi.hbm.xml"/>
+    <mapping resource="ta/util/orm/mapping/AlatUkur.hbm.xml"/>
+    <mapping resource="ta/util/orm/mapping/Pengguna.hbm.xml"/>
+    <mapping resource="ta/util/orm/mapping/DataHasil.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

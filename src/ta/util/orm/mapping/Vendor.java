@@ -1,12 +1,16 @@
 package ta.util.orm.mapping;
-// Generated Oct 20, 2013 5:25:45 PM by Hibernate Tools 3.2.1.GA
+// Generated Jan 29, 2014 9:57:48 PM by Hibernate Tools 3.6.0
 
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -14,39 +18,48 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="vendor"
-    ,catalog="skripsi"
+    ,catalog="`TA-SAHAL`"
 )
 public class Vendor  implements java.io.Serializable {
 
 
-     private Integer id;
+     private Integer idVendor;
      private String nama;
      private String kode;
      private String telepon;
      private String email;
      private String alamat;
+     private Set<AlatUkur> alatUkurs = new HashSet<AlatUkur>(0);
 
     public Vendor() {
     }
 
-    public Vendor(String nama, String kode, String telepon, String email, String alamat) {
+	
+    public Vendor(String nama, String kode) {
+        this.nama = nama;
+        this.kode = kode;
+    }
+    public Vendor(String nama, String kode, String telepon, String email, String alamat, Set<AlatUkur> alatUkurs) {
        this.nama = nama;
        this.kode = kode;
        this.telepon = telepon;
        this.email = email;
        this.alamat = alamat;
+       this.alatUkurs = alatUkurs;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
+
     
-    @Column(name="id", unique=true, nullable=false)
-    public Integer getId() {
-        return this.id;
+    @Column(name="id_vendor", unique=true, nullable=false)
+    public Integer getIdVendor() {
+        return this.idVendor;
     }
     
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdVendor(Integer idVendor) {
+        this.idVendor = idVendor;
     }
+
     
     @Column(name="nama", nullable=false, length=50)
     public String getNama() {
@@ -56,6 +69,7 @@ public class Vendor  implements java.io.Serializable {
     public void setNama(String nama) {
         this.nama = nama;
     }
+
     
     @Column(name="kode", nullable=false, length=5)
     public String getKode() {
@@ -65,8 +79,9 @@ public class Vendor  implements java.io.Serializable {
     public void setKode(String kode) {
         this.kode = kode;
     }
+
     
-    @Column(name="telepon", nullable=false, length=15)
+    @Column(name="telepon", length=24)
     public String getTelepon() {
         return this.telepon;
     }
@@ -74,8 +89,9 @@ public class Vendor  implements java.io.Serializable {
     public void setTelepon(String telepon) {
         this.telepon = telepon;
     }
+
     
-    @Column(name="email", nullable=false, length=45)
+    @Column(name="email", length=45)
     public String getEmail() {
         return this.email;
     }
@@ -83,14 +99,24 @@ public class Vendor  implements java.io.Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
     
-    @Column(name="alamat", nullable=false, length=65535)
+    @Column(name="alamat", length=65535)
     public String getAlamat() {
         return this.alamat;
     }
     
     public void setAlamat(String alamat) {
         this.alamat = alamat;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="vendor")
+    public Set<AlatUkur> getAlatUkurs() {
+        return this.alatUkurs;
+    }
+    
+    public void setAlatUkurs(Set<AlatUkur> alatUkurs) {
+        this.alatUkurs = alatUkurs;
     }
 
 

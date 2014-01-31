@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 29, 2014 9:57:49 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="ta.util.orm.mapping.Akses" table="akses" catalog="`TA-SAHAL`">
+        <id name="idAkses" type="java.lang.Integer">
+            <column name="id_akses" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="pengguna" class="ta.util.orm.mapping.Pengguna" fetch="select">
+            <column name="pengguna" not-null="true" />
+        </many-to-one>
+        <property name="sandi" type="string">
+            <column name="sandi" length="12" not-null="true" />
+        </property>
+        <property name="hak" type="string">
+            <column name="hak" length="9" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 29, 2014 9:57:49 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="ta.util.orm.mapping.Pesanan" table="pesanan" catalog="`TA-SAHAL`">
+        <id name="idPesanan" type="java.lang.Integer">
+            <column name="id_pesanan" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="pengguna" class="ta.util.orm.mapping.Pengguna" fetch="select">
+            <column name="pengguna" not-null="true" />
+        </many-to-one>
+        <many-to-one name="alatUkur" class="ta.util.orm.mapping.AlatUkur" fetch="select">
+            <column name="alat_ukur" not-null="true" />
+        </many-to-one>
+        <property name="noPesan" type="string">
+            <column name="no_pesan" length="45" not-null="true" />
+        </property>
+        <property name="jumlah" type="int">
+            <column name="jumlah" not-null="true" />
+        </property>
+        <property name="tanggal" type="date">
+            <column name="tanggal" length="10" not-null="true" />
+        </property>
+        <set name="pos" table="po" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pesanan" not-null="true" />
+            </key>
+            <one-to-many class="ta.util.orm.mapping.Po" />
+        </set>
+    </class>
+</hibernate-mapping>

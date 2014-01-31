@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 29, 2014 9:57:49 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="ta.util.orm.mapping.AlatUkur" table="alat_ukur" catalog="`TA-SAHAL`">
+        <id name="idAlatUkur" type="java.lang.Integer">
+            <column name="id_alat_ukur" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="vendor" class="ta.util.orm.mapping.Vendor" fetch="select">
+            <column name="vendor" not-null="true" />
+        </many-to-one>
+        <property name="serial" type="string">
+            <column name="serial" length="45" not-null="true" />
+        </property>
+        <property name="kode" type="string">
+            <column name="kode" length="10" not-null="true" />
+        </property>
+        <property name="nama" type="string">
+            <column name="nama" length="45" not-null="true" />
+        </property>
+        <property name="standar" type="string">
+            <column name="standar" length="45" not-null="true" />
+        </property>
+        <property name="model" type="string">
+            <column name="model" length="45" not-null="true" />
+        </property>
+        <property name="lokasi" type="string">
+            <column name="lokasi" length="45" not-null="true" />
+        </property>
+        <property name="jumlah" type="int">
+            <column name="jumlah" not-null="true" />
+        </property>
+        <property name="tanggalBeli" type="date">
+            <column name="tanggal_beli" length="10" not-null="true" />
+        </property>
+        <property name="tipe" type="string">
+            <column name="tipe" length="13" not-null="true" />
+        </property>
+        <set name="pesanans" table="pesanan" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="alat_ukur" not-null="true" />
+            </key>
+            <one-to-many class="ta.util.orm.mapping.Pesanan" />
+        </set>
+        <set name="jadwalKalibrasis" table="jadwal_kalibrasi" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="alat_ukur" not-null="true" />
+            </key>
+            <one-to-many class="ta.util.orm.mapping.JadwalKalibrasi" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 29, 2014 9:57:49 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="ta.util.orm.mapping.DataHasil" table="data_hasil" catalog="`TA-SAHAL`">
+        <id name="idDataHasil" type="java.lang.Integer">
+            <column name="id_data_hasil" />
+            <generator class="identity" />
+        </id>
+        <property name="posisiAlat" type="string">
+            <column name="posisi_alat" length="45" not-null="true" />
+        </property>
+        <property name="deviasi" type="string">
+            <column name="deviasi" length="45" not-null="true" />
+        </property>
+        <property name="type" type="string">
+            <column name="type" length="6" not-null="true" />
+        </property>
+        <set name="hasilKalibrasis" table="hasil_kalibrasi" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="data_hasil" not-null="true" />
+            </key>
+            <one-to-many class="ta.util.orm.mapping.HasilKalibrasi" />
+        </set>
+    </class>
+</hibernate-mapping>

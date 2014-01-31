@@ -19,50 +19,61 @@
  */
 package ta.util.orm.query;
 
+import org.hibernate.HibernateException;
 import ta.util.orm.HibernateUtil;
 import ta.util.orm.MasterQuery;
-import ta.util.orm.mapping.HakAkses;
+import ta.util.orm.mapping.Akses;
+import ta.util.orm.mapping.Pengguna;
 
 /**
  *
  * @author shinzo maru
  */
-public class LoginQuery extends MasterQuery<HakAkses> {
-    private HakAkses user = null;
+public class LoginQuery extends MasterQuery<Pengguna> {
+
+    private Pengguna user = null;
+    private Akses authorized = null;
 
     public LoginQuery() {
     }
-    
-    public boolean isRegistered(String nama, String password) {
+
+    public boolean isRegistered(String nik, String password) {
         boolean registered = false;
         session = HibernateUtil.getSessionFactory().openSession();
         transaction = session.beginTransaction();
-        
-        if (!nama.isEmpty() && !password.isEmpty()) {
+
+        if (!nik.isEmpty() && !password.isEmpty()) {
             try {
-                query = session.createQuery("from HakAkses u where u.nama = '" + nama + "' and u.password = '" + password + "'");
-                user = (HakAkses) query.uniqueResult();
-                
-                if (user != null)
-                    registered = true;
-                else
-                    registered = false;
-            } catch (Exception e) {
+                query = session.createQuery("from Pengguna p where p.nik = '" + nik + "'");
+                user = (Pengguna) query.uniqueResult();
+
+                if (user != null) {
+                    query = session.createQuery("from Akses a where a.pengguna = " + user.getIdPengguna() + " and a.sandi = '" + password + "'");
+                    authorized = (Akses) query.uniqueResult();
+                    registered = (getAuthorized() != null);
+                }
+            } catch (HibernateException e) {
                 transaction.rollback();
-                registered = false;
             } finally {
                 session.close();
             }
         }
-        
+
         return registered;
     }
 
     /**
      * @return the user
      */
-    public HakAkses getUser() {
+    public Pengguna getUser() {
         return user;
     }
-    
+
+    /**
+     * @return the authorized
+     */
+    public Akses getAuthorized() {
+        return authorized;
+    }
+
 }

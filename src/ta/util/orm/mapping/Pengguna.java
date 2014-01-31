@@ -1,12 +1,16 @@
 package ta.util.orm.mapping;
-// Generated Oct 20, 2013 5:25:45 PM by Hibernate Tools 3.2.1.GA
+// Generated Jan 29, 2014 9:57:48 PM by Hibernate Tools 3.6.0
 
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -14,41 +18,54 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="pengguna"
-    ,catalog="skripsi"
+    ,catalog="`TA-SAHAL`"
 )
 public class Pengguna  implements java.io.Serializable {
 
 
-     private Integer id;
+     private Integer idPengguna;
      private String nama;
-     private int nik;
+     private String nik;
      private String bagian;
      private String jabatan;
-     private int hakAkses;
+     private Set<Akses> akseses = new HashSet<Akses>(0);
+     private Set<Po> pos = new HashSet<Po>(0);
+     private Set<Pesanan> pesanans = new HashSet<Pesanan>(0);
 
     public Pengguna() {
     }
 
-    public Pengguna(String nama, int nik, String bagian, String jabatan, int hakAkses) {
+	
+    public Pengguna(String nama, String nik, String bagian, String jabatan) {
+        this.nama = nama;
+        this.nik = nik;
+        this.bagian = bagian;
+        this.jabatan = jabatan;
+    }
+    public Pengguna(String nama, String nik, String bagian, String jabatan, Set<Akses> akseses, Set<Po> pos, Set<Pesanan> pesanans) {
        this.nama = nama;
        this.nik = nik;
        this.bagian = bagian;
        this.jabatan = jabatan;
-       this.hakAkses = hakAkses;
+       this.akseses = akseses;
+       this.pos = pos;
+       this.pesanans = pesanans;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
+
     
-    @Column(name="id", unique=true, nullable=false)
-    public Integer getId() {
-        return this.id;
+    @Column(name="id_pengguna", unique=true, nullable=false)
+    public Integer getIdPengguna() {
+        return this.idPengguna;
     }
     
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdPengguna(Integer idPengguna) {
+        this.idPengguna = idPengguna;
     }
+
     
-    @Column(name="nama", nullable=false, length=45)
+    @Column(name="nama", nullable=false, length=20)
     public String getNama() {
         return this.nama;
     }
@@ -56,17 +73,19 @@ public class Pengguna  implements java.io.Serializable {
     public void setNama(String nama) {
         this.nama = nama;
     }
+
     
-    @Column(name="nik", nullable=false)
-    public int getNik() {
+    @Column(name="nik", nullable=false, length=5)
+    public String getNik() {
         return this.nik;
     }
     
-    public void setNik(int nik) {
+    public void setNik(String nik) {
         this.nik = nik;
     }
+
     
-    @Column(name="bagian", nullable=false, length=30)
+    @Column(name="bagian", nullable=false, length=11)
     public String getBagian() {
         return this.bagian;
     }
@@ -74,8 +93,9 @@ public class Pengguna  implements java.io.Serializable {
     public void setBagian(String bagian) {
         this.bagian = bagian;
     }
+
     
-    @Column(name="jabatan", nullable=false, length=30)
+    @Column(name="jabatan", nullable=false, length=11)
     public String getJabatan() {
         return this.jabatan;
     }
@@ -83,14 +103,32 @@ public class Pengguna  implements java.io.Serializable {
     public void setJabatan(String jabatan) {
         this.jabatan = jabatan;
     }
-    
-    @Column(name="hak_akses", nullable=false)
-    public int getHakAkses() {
-        return this.hakAkses;
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="pengguna")
+    public Set<Akses> getAkseses() {
+        return this.akseses;
     }
     
-    public void setHakAkses(int hakAkses) {
-        this.hakAkses = hakAkses;
+    public void setAkseses(Set<Akses> akseses) {
+        this.akseses = akseses;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="pengguna")
+    public Set<Po> getPos() {
+        return this.pos;
+    }
+    
+    public void setPos(Set<Po> pos) {
+        this.pos = pos;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="pengguna")
+    public Set<Pesanan> getPesanans() {
+        return this.pesanans;
+    }
+    
+    public void setPesanans(Set<Pesanan> pesanans) {
+        this.pesanans = pesanans;
     }
 
 
