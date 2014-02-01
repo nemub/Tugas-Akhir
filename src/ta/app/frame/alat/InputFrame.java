@@ -13,6 +13,7 @@ package ta.app.frame.alat;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import ta.util.orm.MasterQuery;
 import ta.util.orm.mapping.AlatUkur;
 import ta.util.orm.mapping.Vendor;
@@ -23,11 +24,11 @@ import ta.util.orm.mapping.Vendor;
  */
 public class InputFrame extends javax.swing.JInternalFrame {
 
-    private final DefaultListModel model = new DefaultListModel();
-    private final DefaultComboBoxModel boxModel = new DefaultComboBoxModel();
-    private List<AlatUkur> list;
+    private final DefaultListModel modelAlat = new DefaultListModel();
+    private final DefaultComboBoxModel modelVendor = new DefaultComboBoxModel();
+    private List<AlatUkur> listAlat;
     private List<Vendor> listVendors;
-    private final MasterQuery<AlatUkur> query = new MasterQuery<AlatUkur>();
+    private final MasterQuery<AlatUkur> queryAlat = new MasterQuery<AlatUkur>();
     private final MasterQuery<Vendor> queryVendor = new MasterQuery<Vendor>();
 
     /**
@@ -47,7 +48,7 @@ public class InputFrame extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
+        kodeLbl = new javax.swing.JLabel();
         kodeTxt = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
         alatTxt = new javax.swing.JComboBox();
@@ -74,10 +75,9 @@ public class InputFrame extends javax.swing.JInternalFrame {
         serialTxt = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        cariTxt = new javax.swing.JTextField();
-        cariBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         cariList = new javax.swing.JList();
+        cariTxt = new javax.swing.JComboBox();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -85,7 +85,9 @@ public class InputFrame extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
-        jLabel9.setText("MKMG1-");
+        kodeLbl.setText("MKMG1-");
+
+        kodeTxt.setModel(new javax.swing.SpinnerNumberModel(0, 0, 999, 1));
 
         jLabel1.setText("Kode Alat");
 
@@ -101,11 +103,13 @@ public class InputFrame extends javax.swing.JInternalFrame {
 
         jLabel10.setText("-");
 
+        nomorTxt.setModel(new javax.swing.SpinnerNumberModel(0, 0, 999, 1));
+
         lokasiTxt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kalibrasi Room", "CS", "CR", "CH", "CB", "CM" }));
 
         jLabel3.setText("Lokasi");
 
-        vendorTxt.setModel(boxModel);
+        vendorTxt.setModel(modelVendor);
 
         jLabel5.setText("Vendor");
 
@@ -135,6 +139,8 @@ public class InputFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        jumlahTxt.setModel(new javax.swing.SpinnerNumberModel(0, 0, 999, 1));
+
         jLabel7.setText("Jumlah");
 
         tipeTxt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Alat Ukur", "Alat Inspeksi" }));
@@ -150,23 +156,15 @@ public class InputFrame extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(simpanBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(batalBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hapusBtn))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tanggalTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jumlahTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(tanggalTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jumlahTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -177,41 +175,46 @@ public class InputFrame extends javax.swing.JInternalFrame {
                                 .addGap(49, 49, 49)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
+                                        .addComponent(kodeLbl)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(kodeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(tipeTxt, 0, 117, Short.MAX_VALUE)
+                                        .addComponent(kodeTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
+                                    .addComponent(tipeTxt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(serialTxt)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5))
-                                .addGap(46, 46, 46)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(alatTxt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(modelTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                            .addComponent(lokasiTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(simpanBtn)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(batalBtn)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(hapusBtn))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel5))
+                                    .addGap(46, 46, 46)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(standarTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(alatTxt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(modelTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(vendorTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(lokasiTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(jLabel10)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(nomorTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(standarTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(vendorTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                            .addComponent(nomorTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
+                    .addComponent(kodeLbl)
                     .addComponent(kodeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -262,20 +265,7 @@ public class InputFrame extends javax.swing.JInternalFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        cariTxt.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cariTxtKeyPressed(evt);
-            }
-        });
-
-        cariBtn.setText("Cari");
-        cariBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cariBtnActionPerformed(evt);
-            }
-        });
-
-        cariList.setModel(model);
+        cariList.setModel(modelAlat);
         cariList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         cariList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -284,27 +274,29 @@ public class InputFrame extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(cariList);
 
+        cariTxt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Lihat Alat Ukur Berdasarkan Nama", "Vernier Caliper", "Micrometer", "Holtest", "Dial Test Indicator", "Bore Gauge", "Ring Gauge", "Thread Gauge", "Snap Gauge", "Width Gauge", "Plug Gauge" }));
+        cariTxt.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cariTxtItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(cariTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cariBtn)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cariTxt, 0, 230, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cariTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cariBtn))
+                .addComponent(cariTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2)
                 .addContainerGap())
@@ -334,37 +326,72 @@ public class InputFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cariBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cariBtnActionPerformed
-
     private void cariListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_cariListValueChanged
-        // TODO add your handling code here:
+        if (cariList.getSelectedValue() != null) {
+            AlatUkur alatUkur = listAlat.get(cariList.getSelectedIndex());
+            Vendor vendor = queryVendor.detail("Vendor", "idVendor", String.valueOf(alatUkur.getVendor().getIdVendor()));
+            kodeTxt.setEnabled(false);
+            hapusBtn.setEnabled(true);
+            int kode = Integer.parseInt(alatUkur.getKode().replaceFirst(kodeLbl.getText(), ""));
+            kodeTxt.setValue(kode);
+            alatTxt.setSelectedItem(alatUkur.getNama());
+            standarTxt.setText(alatUkur.getStandar());
+            modelTxt.setSelectedItem(alatUkur.getModel());
+            String lokasi[] = alatUkur.getLokasi().split("-");
+            int lokasinya = (lokasi.length > 1) ? Integer.parseInt(lokasi[1]) : 0;
+            lokasiTxt.setSelectedItem(lokasi[0]);
+            nomorTxt.setValue(lokasinya);
+            tanggalTxt.setDate(alatUkur.getTanggalBeli());
+            tipeTxt.setSelectedItem(alatUkur.getTipe());
+            serialTxt.setText(alatUkur.getSerial());
+            jumlahTxt.setValue(alatUkur.getJumlah());
+            vendorTxt.setSelectedItem(vendor.getNama());
+            kodeTxt.transferFocus();
+        }
     }//GEN-LAST:event_cariListValueChanged
 
-    private void cariTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariTxtKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cariTxtKeyPressed
-
     private void simpanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanBtnActionPerformed
-        // TODO add your handling code here:
+        saving();
     }//GEN-LAST:event_simpanBtnActionPerformed
 
     private void batalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalBtnActionPerformed
-        // TODO add your handling code here:
+        defaultView();
+        fill();
     }//GEN-LAST:event_batalBtnActionPerformed
 
     private void hapusBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusBtnActionPerformed
-        // TODO add your handling code here:
+        String item = kodeLbl.getText() + kodeTxt.getValue();
+        int confirm = JOptionPane.showConfirmDialog(this, "Yakin ingin menghapus data alat ukur [" + item + "] ?", "Konfirmasi", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (confirm == JOptionPane.OK_OPTION) {
+            AlatUkur alatUkur = queryAlat.detail("AlatUkur", "kode", item);
+
+            if (alatUkur != null) {
+                boolean action = queryAlat.action(alatUkur, MasterQuery.DELETE);
+                JOptionPane.showMessageDialog(this, "Alat Ukur [" + item + "] " + ((action) ? "berhasil " : "gagal ") + "dihapus", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+
+        defaultView();
+        fill();
     }//GEN-LAST:event_hapusBtnActionPerformed
+
+    private void cariTxtItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cariTxtItemStateChanged
+        if (cariTxt.getSelectedItem() != null) {
+            if (!cariTxt.getSelectedItem().equals("Lihat Alat Ukur Berdasarkan Nama")) {
+                find();
+            } else {
+                fill();
+            }
+        }
+    }//GEN-LAST:event_cariTxtItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox alatTxt;
     private javax.swing.JButton batalBtn;
-    private javax.swing.JButton cariBtn;
     private javax.swing.JList cariList;
-    private javax.swing.JTextField cariTxt;
+    private javax.swing.JComboBox cariTxt;
     private javax.swing.JButton hapusBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -377,11 +404,11 @@ public class InputFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner jumlahTxt;
+    private javax.swing.JLabel kodeLbl;
     private javax.swing.JSpinner kodeTxt;
     private javax.swing.JComboBox lokasiTxt;
     private javax.swing.JComboBox modelTxt;
@@ -395,33 +422,102 @@ public class InputFrame extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void fill() {
-        defaultView();
-        boxModel.removeAllElements();
+        modelAlat.clear();
+        modelVendor.removeAllElements();
         listVendors = queryVendor.getListData("Vendor");
+        listAlat = queryAlat.getListData("AlatUkur");
 
         for (Vendor vendor : listVendors) {
-            boxModel.addElement(vendor);
+            modelVendor.addElement(vendor.getNama());
         }
 
-        if (listVendors.isEmpty()) {
-            boxModel.addElement("Vendor belum terdata");
+        for (AlatUkur alatUkur : listAlat) {
+            modelAlat.addElement(alatUkur.getKode());
         }
 
         cariList.transferFocus();
     }
 
     private void defaultView() {
-        model.clear();
         kodeTxt.setEnabled(true);
         hapusBtn.setEnabled(false);
+        cariTxt.setSelectedIndex(0);
         kodeTxt.setValue(0);
         alatTxt.setSelectedIndex(0);
         standarTxt.setText("");
         modelTxt.setSelectedIndex(0);
         lokasiTxt.setSelectedIndex(0);
         nomorTxt.setValue(0);
-        vendorTxt.setSelectedIndex(0);
         tanggalTxt.setDate(null);
+        tipeTxt.setSelectedIndex(0);
+        serialTxt.setText("");
+        jumlahTxt.setValue(0);
+        cariList.transferFocus();
+
+        if (modelVendor.getSize() > 0) {
+            vendorTxt.setSelectedIndex(0);
+        }
+    }
+
+    private void saving() {
+        String msg = "Perubahan data Alat Ukur ";
+        boolean action = false, result = false;
+
+        if (serialTxt.getText().isEmpty() || standarTxt.getText().isEmpty() || tanggalTxt.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Mohon isikan terlebih dahulu Nomor Seri, Standar dan Tanggal Pembelian", "Peringatan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (serialTxt.getText().length() <= 45 && standarTxt.getText().length() <= 45) {
+                AlatUkur alatUkur = queryAlat.detail("AlatUkur", "kode", kodeLbl.getText() + kodeTxt.getValue());
+
+                if (alatUkur == null) {
+                    alatUkur = new AlatUkur();
+                    alatUkur.setIdAlatUkur(0);
+                }
+
+                String letakLokasi = (String.valueOf(lokasiTxt.getSelectedItem()).equals("Kalibrasi Room")) ? "" : "-" + nomorTxt.getValue();
+                alatUkur.setKode(kodeLbl.getText() + kodeTxt.getValue());
+                alatUkur.setTipe(String.valueOf(tipeTxt.getSelectedItem()));
+                alatUkur.setSerial(serialTxt.getText());
+                alatUkur.setNama(String.valueOf(alatTxt.getSelectedItem()));
+                alatUkur.setStandar(standarTxt.getText());
+                alatUkur.setModel(String.valueOf(modelTxt.getSelectedItem()));
+                alatUkur.setLokasi(String.valueOf(lokasiTxt.getSelectedItem()) + letakLokasi);
+                alatUkur.setVendor(queryVendor.detail("Vendor", "nama", String.valueOf(vendorTxt.getSelectedItem())));
+                alatUkur.setTanggalBeli(tanggalTxt.getDate());
+                alatUkur.setJumlah(Integer.parseInt(String.valueOf(jumlahTxt.getValue())));
+
+                if (kodeTxt.isEnabled()) {
+                    if (alatUkur.getIdAlatUkur() == 0) {
+                        action = queryAlat.action(alatUkur, MasterQuery.ADD);
+                        result = true;
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Alat Ukur dengan Kode [" + alatUkur.getKode() + "] sudah terdaftar", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                } else {
+                    action = queryAlat.action(alatUkur, MasterQuery.UPDATE);
+                    result = true;
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Jumlah huruf untuk Nomor Seri atau Standar melebihi batas ketentuan", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+
+        if (result) {
+            JOptionPane.showMessageDialog(this, msg + ((action) ? "berhasil " : "gagal ") + "diproses", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        fill();
+        defaultView();
+    }
+
+    private void find() {
+        modelAlat.clear();
+        listAlat = queryAlat.getListData("AlatUkur", "nama", String.valueOf(cariTxt.getSelectedItem()));
+
+        for (AlatUkur alatUkur : listAlat) {
+            modelAlat.addElement(alatUkur.getKode());
+        }
+
         cariList.transferFocus();
     }
 

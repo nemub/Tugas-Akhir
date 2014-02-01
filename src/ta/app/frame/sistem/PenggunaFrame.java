@@ -15,6 +15,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import ta.util.orm.MasterQuery;
+import ta.util.orm.mapping.Akses;
 import ta.util.orm.mapping.Pengguna;
 
 /**
@@ -26,6 +27,8 @@ public class PenggunaFrame extends javax.swing.JInternalFrame {
     private final DefaultListModel userModel = new DefaultListModel();
     private List<Pengguna> listUser;
     private final MasterQuery<Pengguna> queryUser = new MasterQuery<Pengguna>();
+    // global var
+    private Akses authorized;
 
     /**
      * Creates new form PenggunaFrame
@@ -241,7 +244,7 @@ public class PenggunaFrame extends javax.swing.JInternalFrame {
                 if (user != null) {
                     boolean action = queryUser.action(user, MasterQuery.DELETE);
                     JOptionPane.showMessageDialog(this, "Pengguna [" + name + "] " + ((action) ? "berhasil " : "gagal ") + "dihapus", "Informasi", JOptionPane.INFORMATION_MESSAGE);
-                    fill();
+                    fill(authorized);
                 }
             }
         }
@@ -309,7 +312,8 @@ public class PenggunaFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton simpanBtn;
     // End of variables declaration//GEN-END:variables
 
-    public void fill() {
+    public void fill(Akses authorized) {
+        this.authorized = authorized;
         userModel.clear();
         listUser = queryUser.getListData("Pengguna");
 
@@ -319,6 +323,7 @@ public class PenggunaFrame extends javax.swing.JInternalFrame {
 
         userModel.addElement("[Tambah Pengguna Baru]");
         penggunaList.transferFocus();
+        auth();
     }
 
     private void defaultView() {
@@ -330,6 +335,7 @@ public class PenggunaFrame extends javax.swing.JInternalFrame {
         jabatanTxt.setSelectedIndex(0);
         penggunaList.setSelectedIndex(listUser.size());
         penggunaList.transferFocus();
+        auth();
     }
 
     private void saving() {
@@ -372,8 +378,15 @@ public class PenggunaFrame extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, msg + ((action) ? "berhasil " : "gagal ") + "diproses", "Informasi", JOptionPane.INFORMATION_MESSAGE);
         }
 
-        fill();
+        fill(authorized);
         defaultView();
+    }
+
+    private void auth() {
+        if (authorized.getHak().equals("Pengguna") || authorized.getHak().equals("Pimpinan")) {
+            hapusBtn.setEnabled(false);
+            simpanBtn.setEnabled(false);
+        }
     }
 
 }

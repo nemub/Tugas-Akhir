@@ -12,11 +12,13 @@ package ta.app;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import ta.app.dialog.InfoDialog;
 import ta.app.frame.alat.InputFrame;
 import ta.app.frame.sistem.MasukFrame;
 import ta.app.frame.sistem.OtorisasiFrame;
@@ -31,11 +33,14 @@ import ta.util.orm.mapping.Pengguna;
  */
 public class Master extends javax.swing.JFrame {
 
+    private JDialog infoBox;
     // Menu Sistem
     private final JInternalFrame[] frames = new JInternalFrame[5];
     // Menu Keys
     private static final int LOGIN = 0, ACCOUNT = 1, USER = 2, VENDOR = 3,
             ITEM = 4;
+    // global var
+    private Akses authorized;
 
     /**
      * Creates new form Master
@@ -82,6 +87,7 @@ public class Master extends javax.swing.JFrame {
         lapStokItem = new javax.swing.JMenuItem();
         lapKalibrasiItem = new javax.swing.JMenuItem();
         lapOrderItem = new javax.swing.JMenuItem();
+        infoMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplikasi Sistem Informasi Alat Ukur");
@@ -165,11 +171,6 @@ public class Master extends javax.swing.JFrame {
         hasilKalItem.setText("Hasil Kalibrasi");
 
         dataKalItem.setText("Data Kalibrasi");
-        dataKalItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dataKalItemActionPerformed(evt);
-            }
-        });
         hasilKalItem.add(dataKalItem);
 
         dataUkurItem.setText("Data Ukur");
@@ -185,11 +186,6 @@ public class Master extends javax.swing.JFrame {
         orderMenu.add(permohonanItem);
 
         buatPOItem.setText("Pembuatan PO");
-        buatPOItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buatPOItemActionPerformed(evt);
-            }
-        });
         orderMenu.add(buatPOItem);
 
         setujuPOItem.setText("Persetujuan PO");
@@ -212,6 +208,18 @@ public class Master extends javax.swing.JFrame {
         laporanMenu.add(lapOrderItem);
 
         Transaksi.add(laporanMenu);
+
+        infoMenu.setText("Informasi");
+        infoMenu.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                infoMenuMenuSelected(evt);
+            }
+        });
+        Transaksi.add(infoMenu);
 
         setJMenuBar(Transaksi);
 
@@ -244,14 +252,14 @@ public class Master extends javax.swing.JFrame {
         VendorFrame vendorFrame = (VendorFrame) frames[VENDOR];
         closeAllFrame();
         frames[VENDOR].show();
-        vendorFrame.fill();
+        vendorFrame.fill(authorized);
     }//GEN-LAST:event_vendorItemActionPerformed
 
     private void penggunaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_penggunaItemActionPerformed
         PenggunaFrame penggunaFrame = (PenggunaFrame) frames[ACCOUNT];
         closeAllFrame();
         frames[ACCOUNT].show();
-        penggunaFrame.fill();
+        penggunaFrame.fill(authorized);
     }//GEN-LAST:event_penggunaItemActionPerformed
 
     private void otorisasiItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_otorisasiItemActionPerformed
@@ -272,13 +280,13 @@ public class Master extends javax.swing.JFrame {
         inputFrame.fill();
     }//GEN-LAST:event_inputItemActionPerformed
 
-    private void dataKalItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataKalItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dataKalItemActionPerformed
+    private void infoMenuMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_infoMenuMenuSelected
+        if (infoBox == null) {
+            infoBox = new InfoDialog(this, true);
+        }
 
-    private void buatPOItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buatPOItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buatPOItemActionPerformed
+        infoBox.setVisible(true);
+    }//GEN-LAST:event_infoMenuMenuSelected
 
     /*
      * @param args the command line arguments
@@ -299,6 +307,7 @@ public class Master extends javax.swing.JFrame {
     private javax.swing.JMenuItem dataKalItem;
     private javax.swing.JMenuItem dataUkurItem;
     private javax.swing.JMenu hasilKalItem;
+    private javax.swing.JMenu infoMenu;
     private javax.swing.JMenuItem inputItem;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
@@ -371,6 +380,7 @@ public class Master extends javax.swing.JFrame {
         vendorItem.setEnabled(false);
         penggunaItem.setEnabled(false);
         otorisasiItem.setEnabled(false);
+        masukItem.setEnabled(true);
     }
 
     private void closeAllFrame() {
@@ -383,17 +393,32 @@ public class Master extends javax.swing.JFrame {
 
     public void authorized(Pengguna user, Akses authorized) {
         defaultView();
+        this.authorized = authorized;
         masukItem.setEnabled(false);
         keluarItem.setEnabled(true);
+        vendorItem.setEnabled(true);
+        penggunaItem.setEnabled(true);
+        alatMenu.setEnabled(true);
+        orderMenu.setEnabled(true);
+
+        if (!authorized.getHak().equals("Pengguna")) {
+            laporanMenu.setEnabled(true);
+        }
 
         if (authorized.getHak().equals("Admin")) {
-            penggunaItem.setEnabled(true);
+            kalibrasiMenu.setEnabled(true);
             otorisasiItem.setEnabled(true);
         } else if (authorized.getHak().equals("Inspector")) {
+            kalibrasiMenu.setEnabled(true);
         } else if (authorized.getHak().equals("Pengguna")) {
-            vendorItem.setEnabled(true);
-            alatMenu.setEnabled(true);
+            inputItem.setEnabled(false);
+            permohonanItem.setEnabled(true);
+            buatPOItem.setEnabled(false);
+            setujuPOItem.setEnabled(false);
         } else if (authorized.getHak().equals("Pimpinan")) {
+            inputItem.setEnabled(false);
+            buatPOItem.setEnabled(false);
+            permohonanItem.setEnabled(false);
         }
     }
 }

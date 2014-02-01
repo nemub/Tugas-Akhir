@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import ta.util.orm.MasterQuery;
+import ta.util.orm.mapping.Akses;
 import ta.util.orm.mapping.Vendor;
 
 /**
@@ -25,6 +26,8 @@ public class VendorFrame extends javax.swing.JInternalFrame {
     private final DefaultListModel vendorModel = new DefaultListModel();
     private List<Vendor> listVendor;
     private final MasterQuery<Vendor> queryVendor = new MasterQuery<Vendor>();
+    // global var
+    private Akses authorized;
 
     /**
      * Creates new form VendoFrame
@@ -249,7 +252,7 @@ public class VendorFrame extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, msg + ((action) ? "berhasil " : "gagal ") + "diproses", "Informasi", JOptionPane.INFORMATION_MESSAGE);
         }
 
-        fill();
+        fill(authorized);
         defaultView();
     }//GEN-LAST:event_simpanBtnActionPerformed
 
@@ -263,7 +266,7 @@ public class VendorFrame extends javax.swing.JInternalFrame {
             if (vendor != null) {
                 boolean action = queryVendor.action(vendor, MasterQuery.DELETE);
                 JOptionPane.showMessageDialog(this, "Vendor [" + name + "] " + ((action) ? "berhasil " : "gagal ") + "dihapus", "Informasi", JOptionPane.INFORMATION_MESSAGE);
-                fill();
+                fill(authorized);
             }
         }
 
@@ -285,6 +288,8 @@ public class VendorFrame extends javax.swing.JInternalFrame {
                 alamatTxt.setText(vendor.getAlamat());
                 kodeTxt.transferFocus();
             }
+
+            auth();
         }
     }//GEN-LAST:event_vendorListValueChanged
 
@@ -309,7 +314,8 @@ public class VendorFrame extends javax.swing.JInternalFrame {
     private javax.swing.JList vendorList;
     // End of variables declaration//GEN-END:variables
 
-    public void fill() {
+    public void fill(Akses authorized) {
+        this.authorized = authorized;
         vendorModel.clear();
         listVendor = queryVendor.getListData("Vendor");
 
@@ -319,6 +325,7 @@ public class VendorFrame extends javax.swing.JInternalFrame {
 
         vendorModel.addElement("[Tambah Vendor Baru]");
         vendorList.transferFocus();
+        auth();
     }
 
     private void defaultView() {
@@ -331,5 +338,13 @@ public class VendorFrame extends javax.swing.JInternalFrame {
         alamatTxt.setText("");
         vendorList.setSelectedIndex(listVendor.size());
         vendorList.transferFocus();
+        auth();
+    }
+
+    private void auth() {
+        if (authorized.getHak().equals("Pengguna") || authorized.getHak().equals("Pimpinan")) {
+            hapusBtn.setEnabled(false);
+            simpanBtn.setEnabled(false);
+        }
     }
 }
