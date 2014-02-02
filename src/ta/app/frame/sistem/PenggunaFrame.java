@@ -267,6 +267,8 @@ public class PenggunaFrame extends javax.swing.JInternalFrame {
                 nikTxt.transferFocus();
             }
         }
+
+        auth();
     }//GEN-LAST:event_penggunaListValueChanged
 
     private void nikTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nikTxtKeyPressed
