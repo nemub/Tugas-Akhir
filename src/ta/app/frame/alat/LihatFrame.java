@@ -41,30 +41,30 @@ public class LihatFrame extends javax.swing.JInternalFrame {
         cariBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         lokasiTxt = new javax.swing.JComboBox();
-        nolokasiTxt = new javax.swing.JTextField();
+        jSpinner1 = new javax.swing.JSpinner();
         jSeparator1 = new javax.swing.JSeparator();
 
         setClosable(true);
-        setIconifiable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         setTitle("Data Alat Ukur");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         alatTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Kode Alat", "No. Seri", "Nama Alat", "Standar", "Type", "Model", "Lokasi", "Vendor", "Jumlah", "Tanggal Pembelian ", "Tanggal Pemakaian"
+                "Kode Alat", "No. Seri", "Standar", "Type", "Model", "Vendor", "Jumlah", "Tanggal Pembelian ", "Tanggal Pemakaian"
             }
         ));
         jScrollPane1.setViewportView(alatTable);
@@ -75,8 +75,8 @@ public class LihatFrame extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1151, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 923, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,13 +92,13 @@ public class LihatFrame extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Nama Alat");
 
-        namaTxt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        namaTxt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vernier Caliper", "Micrometer", "Holtest", "Dial Test Indicator", "Bore Gauge", "Ring Gauge", "Thread Gauge", "Snap Gauge", "Width Gauge", "Plug Gauge" }));
 
         cariBtn.setText("Cari");
 
         jLabel3.setText("-");
 
-        lokasiTxt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        lokasiTxt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kalibrasi Room", "CS", "CR", "CH", "CB", "CM" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -120,7 +120,7 @@ public class LihatFrame extends javax.swing.JInternalFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel3)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(nolokasiTxt))))
+                            .addComponent(jSpinner1))))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -135,7 +135,7 @@ public class LihatFrame extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(lokasiTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(nolokasiTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(cariBtn))
         );
@@ -153,7 +153,7 @@ public class LihatFrame extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(656, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,9 +181,9 @@ public class LihatFrame extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JComboBox lokasiTxt;
     private javax.swing.JComboBox namaTxt;
-    private javax.swing.JTextField nolokasiTxt;
     // End of variables declaration//GEN-END:variables
 
 }
