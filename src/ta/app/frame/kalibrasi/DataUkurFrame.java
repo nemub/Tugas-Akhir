@@ -45,7 +45,7 @@ public class DataUkurFrame extends javax.swing.JInternalFrame {
         deviasiTxt = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        dataukurTxt = new javax.swing.JList();
+        dataukurList = new javax.swing.JList();
         jComboBox1 = new javax.swing.JComboBox();
 
         setClosable(true);
@@ -134,13 +134,13 @@ public class DataUkurFrame extends javax.swing.JInternalFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED), "List Data Ukur Kalibrasi"));
 
-        dataukurTxt.setModel(new javax.swing.AbstractListModel() {
+        dataukurList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        dataukurTxt.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane2.setViewportView(dataukurTxt);
+        dataukurList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(dataukurList);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Lihat Data Berdasarkan Nama", "Vernier Caliper", "Micrometer", "Holtest", "Dial Test Indicator", "Bore Gauge", "Ring Gauge", "Thread Gauge", "Snap Gauge", "Width Gauge", "Plug Gauge" }));
 
@@ -192,7 +192,7 @@ public class DataUkurFrame extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton batalBtn;
-    private javax.swing.JList dataukurTxt;
+    private javax.swing.JList dataukurList;
     private javax.swing.JTextField deviasiTxt;
     private javax.swing.JButton hapusBtn;
     private javax.swing.JComboBox jComboBox1;
